@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pydantic-settings
+httpx
+opentelemetry-sdk
+opentelemetry-instrumentation-fastapi
+watchdog
+jinja2
+markdown
+frontmatter
+pathspec
+click
+rich
+pyyaml
+toml
