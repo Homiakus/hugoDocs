@@ -46,7 +46,7 @@ class ConversionConfig(BaseModel):
     convert_tags: bool = True
     convert_attachments: bool = True
     attachment_extensions: Set[str] = Field(default_factory=lambda: {
-        "png", "jpg", "jpeg", "gif", "svg", "pdf", "mp4", "mp3", "zip"
+        "png", "jpg", "jpeg", "gif", "svg", "pdf", "mp4", "mp3", "zip", "gltf", "glb"
     })
     exclude_patterns: List[str] = Field(default_factory=list)
     include_patterns: List[str] = Field(default_factory=lambda: ["*.md"])

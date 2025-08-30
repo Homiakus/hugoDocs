@@ -20,6 +20,11 @@ class ObsidianParser:
         self.callout_pattern = re.compile(r'^>\s*\[!(\w+)\](.*)', re.MULTILINE)
         self.code_block_pattern = re.compile(r'```(\w+)?\n(.*?)```', re.DOTALL)
         
+        # Patterns for media files
+        self.media_link_pattern = re.compile(r'!\[([^\]]*)\]\(([^)]+)\)')
+        self.pdf_link_pattern = re.compile(r'\[([^\]]+)\]\(([^)]+\.pdf)\)')
+        self.gltf_link_pattern = re.compile(r'\[([^\]]+)\]\(([^)]+\.(?:gltf|glb))\)')
+        
     def parse_file(self, file_path: Path) -> ObsidianNote:
         """Parse an Obsidian markdown file."""
         if not file_path.exists():
@@ -110,6 +115,33 @@ class ObsidianParser:
                 return f'[{display_text}]({link_target})'
         
         return self.wikilink_pattern.sub(replace_wikilink, content)
+    
+    def convert_media_links(self, content: str) -> str:
+        """Convert media links to Hugo shortcodes."""
+        # Convert PDF links to PDF viewer shortcode
+        def replace_pdf_link(match):
+            display_text = match.group(1)
+            pdf_path = match.group(2)
+            return f'{{{{< pdf-viewer url="{pdf_path}" title="{display_text}" >}}}}'
+        
+        # Convert GLTF links to 3D viewer shortcode
+        def replace_gltf_link(match):
+            display_text = match.group(1)
+            gltf_path = match.group(2)
+            return f'{{{{< gltf-viewer url="{gltf_path}" title="{display_text}" >}}}}'
+        
+        # Convert image links to enhanced image shortcode
+        def replace_image_link(match):
+            alt_text = match.group(1)
+            image_path = match.group(2)
+            return f'{{{{< image src="{image_path}" alt="{alt_text}" >}}}}'
+        
+        # Apply conversions in order
+        content = self.pdf_link_pattern.sub(replace_pdf_link, content)
+        content = self.gltf_link_pattern.sub(replace_gltf_link, content)
+        content = self.media_link_pattern.sub(replace_image_link, content)
+        
+        return content
     
     def convert_callouts(self, content: str) -> str:
         """Convert Obsidian callouts to Hugo-compatible format."""

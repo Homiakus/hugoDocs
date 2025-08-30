@@ -157,6 +157,9 @@ class HugoConverter:
         # Convert code blocks
         content = self.parser.convert_code_blocks(content)
         
+        # Convert media links (PDF, GLTF, images)
+        content = self.parser.convert_media_links(content)
+        
         # Process tags
         if self.config.convert_tags:
             content = self._process_tags(content, obsidian_note.tags)

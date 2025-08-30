@@ -71,7 +71,7 @@ def cli():
 @click.option(
     '--attachment-extensions',
     multiple=True,
-    default=['png', 'jpg', 'jpeg', 'gif', 'svg', 'pdf', 'mp4', 'mp3', 'zip'],
+    default=['png', 'jpg', 'jpeg', 'gif', 'svg', 'pdf', 'mp4', 'mp3', 'zip', 'gltf', 'glb'],
     help='File extensions to copy as attachments'
 )
 @click.option(
