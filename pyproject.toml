@@ -1,0 +1,62 @@
+[project]
+name = "obsidian-to-hugo"
+version = "0.1.0"
+description = "Automated converter from Obsidian vault to Hugo wiki with PaperMod theme"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic-settings",
+    "httpx",
+    "opentelemetry-sdk",
+    "opentelemetry-instrumentation-fastapi",
+    "watchdog",
+    "jinja2",
+    "markdown",
+    "frontmatter",
+    "pathspec",
+    "click",
+    "rich",
+    "pyyaml",
+    "toml",
+    "PyQt6",
+    "qdarktheme",
+    "qt-material",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+    "bandit",
+    "pip-audit",
+    "black",
+    "isort",
+]
+
+[tool.ruff]
+line-length = 100
+lint.select = ["E","F","I","B","UP","N","S","PL"]
+lint.ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+addopts = "-q --maxfail=1"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.coverage.report]
+omit = ["tests/*"]

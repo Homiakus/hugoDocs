@@ -1,0 +1,161 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'My Obsidian Wiki'
+theme = 'hugo-papermod'
+
+# PaperMod theme configuration
+[params]
+  env = 'production'
+  title = 'My Obsidian Wiki'
+  description = 'Converted from Obsidian vault'
+  keywords = ['wiki', 'knowledge', 'notes']
+  author = 'Obsidian Converter'
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  profileMode = false
+  homeInfoParams:
+    Title = "Hi there 👋"
+    Content = "Welcome to my converted Obsidian wiki"
+
+  socialIcons:
+    - name = github
+      url = "https://github.com/"
+
+  analytics:
+    google = ""
+
+  mainSections = ["posts", "docs"]
+
+  # Search configuration
+  fuseOpts:
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+[params.homeInfoParams]
+  Title = "Hi there 👋"
+  Content = "Welcome to my converted Obsidian wiki"
+
+[params.profileMode]
+  enabled = false
+  title = "ExampleSite"
+  subtitle = "This is subtitle"
+  imageUrl = "<title>/images/bruce-lee.jpg</title>"
+  imageTitle = "my image"
+  buttons:
+    - name = "Posts"
+      url = "posts"
+    - name = "Tags"
+      url = "tags"
+
+[params.assets]
+  favicon = "<link / >"
+  favicon16x16 = "<link / >"
+  favicon32x32 = "<link / >"
+  apple_touch_icon = "<link / >"
+  safari_pinned_tab = "<link / >"
+
+[params.label]
+  text = "Home"
+  icon = "/apple-touch-icon.png"
+  iconHeight = 35
+
+# Menu configuration
+[[menu.main]]
+  identifier = "categories"
+  name = "categories"
+  url = "/categories/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "tags"
+  name = "tags"
+  url = "/tags/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "example"
+  name = "example.org"
+  url = "https://example.org"
+  weight = 30
+
+# Markup configuration
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    noHl = false
+    noLineNos = false
+    noStyles = false
+    numbers = false
+    style = "monokai"
+    tabWidth = 4
+    lineNos = true
+    lineNumbersInTable = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineAnchors = ""
+    anchorLineNos = false
+    codeFences = true
+    wrap = false
+    wrapLongLines = false
+    useClasses = false
+    classes = ""
+
+# Security configuration
+[security]
+  [security.exec]
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$', '^babel$']
+    osEnv = ['(?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM)$']
+  [security.funcs]
+    getenv = ['^HUGO_']
+  [security.http]
+    methods = ['(?i)GET|POST|HEAD']
+    urls = ['.*']
+
+# Server configuration
+[server]
+  [[server.headers]]
+    for = '/admin/**'
+    [server.headers.values]
+      X-Frame-Options = 'DENY'
+      X-Content-Type-Options = 'nosniff'
+      X-XSS-Protection = '1; mode=block'
+      Referrer-Policy = 'strict-origin-when-cross-origin'
+
+# Build configuration
+[build]
+  writeStats = true
+
+# Taxonomies
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
+# Permalinks
+[permalinks]
+  posts = "/:year/:month/:title/"
+  docs = "/docs/:title/"
+
+# Pagination
+[pagination]
+  pages = 10
+  posts = 10
+  categories = 10
+  tags = 10
+  series = 10
