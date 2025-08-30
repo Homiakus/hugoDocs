@@ -19,6 +19,9 @@ dependencies = [
     "rich",
     "pyyaml",
     "toml",
+    "PyQt6",
+    "qdarktheme",
+    "qt-material",
 ]
 
 [project.optional-dependencies]

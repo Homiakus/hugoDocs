@@ -39,10 +39,13 @@ e2e:
 	pytest -q tests/e2e
 
 convert:
-	$(PY) -m app.cli convert
+	$(PY) -m obsidian_to_hugo convert
 
 watch:
-	$(PY) -m app.cli watch
+	$(PY) -m obsidian_to_hugo watch
+
+gui:
+	$(PY) -m obsidian_to_hugo --gui
 
 install:
 	pip install -e .[dev]
