@@ -47,5 +47,8 @@ watch:
 gui:
 	$(PY) -m obsidian_to_hugo --gui
 
+serve:
+	./scripts/start_hugo_server.sh
+
 install:
 	pip install -e .[dev]
